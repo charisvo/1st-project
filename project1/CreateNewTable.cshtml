@@ -1,0 +1,36 @@
+﻿@using GradesNamespace;
+@{
+    Page.Title = "Create New Table";
+    Layout = "_Layout.cshtml";
+
+
+    if (IsPost)
+    {
+        var db = new StudentGrades();
+
+
+        foreach(var deleteall in db.GradeTable)
+        {
+            db.GradeTable.Remove(deleteall);
+
+        };
+        db.SaveChanges();
+        Response.Redirect("/Home.cshtml");
+    }
+
+
+
+
+}
+
+<div>
+    <section class="intro">
+
+        You can create a new grade table. If you choose to create a new table, the content of <br />
+        your current table will be deleted. Do you want to create a new table?<br />
+
+        <form action="/CreateNewTable" method="post">
+            <button type="submit" id="YES">Yes</button>
+        </form>
+    </section>
+</div>

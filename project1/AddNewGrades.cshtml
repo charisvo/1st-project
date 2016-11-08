@@ -1,0 +1,71 @@
+﻿@using GradesNamespace;
+@{
+    Page.Title = "Add New Grades";
+    Layout = "_Layout.cshtml";
+
+    bool existingID = false;
+    if (IsPost)
+    {
+        // Retrieve the numbers that the user entered.
+        var num1 = Request.Form["id"].AsInt();
+        var num2 = Request.Form["FirstName"];
+        var num3 = Request.Form["LastName"];
+        var num4 = Request.Form["grade"].AsInt();
+
+        if (Request.Form["id"].IsInt() && num1 > 0)
+        {
+            var db = new StudentGrades();
+            var exists = db.GradeTable.Where(x => x.StudentID == num1).FirstOrDefault();
+            if (exists!=null) { existingID = true; }
+            else
+            {
+                var newgrade = new GradeTable()
+                {
+                    Grade = num4,
+                    StudentID = num1,
+                    StudentFirstName = num2,
+                    StudentLastName = num3
+                };
+                db.GradeTable.Add(newgrade);
+                db.SaveChanges();
+
+
+            }
+
+        }
+    }
+
+
+}
+
+
+
+<div>
+    <section class="intro">
+        <p>Please insert the id and the full name of the student and select a grade:</p>
+        <form action="/AddNewGrades" method="post">
+            ID<br /><input type="text" name="id" id="id" size="10" required><br />
+            First Name<br /><input type="text" name="FirstName" id="FirstName" required><br />
+            Last Name<br /><input type="text" name="LastName" id="LastName" required><br />
+            Grade<br />
+            <select name="grade" id="grade">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+            </select><br />
+            <button type="submit">Submit</button>
+        </form>
+        @if (existingID==true)
+        {
+        <p><font color="red"> The submitted ID already exists, please enter a new ID.</font></p>
+        }
+    </section>
+</div>

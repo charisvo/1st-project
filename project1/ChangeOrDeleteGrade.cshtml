@@ -1,0 +1,92 @@
+﻿@using GradesNamespace;
+@{
+    Page.Title = "Change or delete grade";
+    Layout = "_Layout.cshtml";
+
+    bool NotExistingID1 = false;
+    bool NotExistingID2 = false;
+
+    if (IsPost)
+    {
+        var num1 = Request.Form["id1"].AsInt();
+        var num2 = Request.Form["id2"].AsInt();
+        var num3 = Request.Form["newgrade"].AsInt();
+
+        if ( Request.Form["id1"].IsInt() && num1 > 0 ){
+            using (var db = new StudentGrades())
+            {
+                var entry = db.GradeTable.FirstOrDefault(x => x.StudentID == num1);
+                if (entry == null) { NotExistingID1 = true; }
+                else{
+                    db.GradeTable.Remove(entry);
+                    db.SaveChanges();
+                }
+
+            }
+        }
+        if (Request.Form["id2"].IsInt() && num2 > 0  )
+        {
+            using (var db = new StudentGrades())
+            {
+                var change = db.GradeTable.Where(b => b.StudentID == num2).FirstOrDefault();
+                if (change == null) { NotExistingID2 = true; }
+                else
+                {
+                    change.Grade = num3;
+                    db.SaveChanges();
+                }
+            }
+        }
+
+
+    }
+
+}
+
+<div>
+    <section class="intro">
+        <p>
+             You can change the grade of a student or delete an entry.
+        <br />
+        </p>
+        
+        <article>
+            <form action="/ChangeOrDeleteGrade" method="post">
+                If you want to delete an entry, <br />
+                please submit the <strong>id</strong> of the student:
+                <br /><input type="text" name="id1" id="id1" size="10" required><br />
+                @if (NotExistingID1 == true)
+                {
+                    <font color="red">The submitted ID does not exist, please submit an new ID.</font><br />
+                }
+                <button type="submit" id="delete">Delete entry from table</button>
+            </form>
+        </article>
+        <article>
+            
+            <form action="/ChangeOrDeleteGrade" method="post">
+                If you want to change a grade, <br />
+                please submit the <strong>id</strong> of the student and the <strong>new grade</strong>:<br />
+                <input type="text" name="id2" id="id2" size="10" required><br />
+                new grade:<select name="newgrade" id="newgrade">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                </select><br />
+                @if (NotExistingID2 == true)
+                {
+                    <font color="red">The submitted ID does not exist, please submit an new ID.</font><br />
+                }
+                <button type="submit" id="change">Submit new grade</button>
+            </form>
+        </article>
+</section>
+</div>

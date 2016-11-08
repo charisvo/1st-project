@@ -1,0 +1,98 @@
+﻿body {
+    padding:0;
+    margin:0;
+    font: 400 16px/1.5 helvetica, sans-serif;
+    color:#333333;
+    background-color:white;
+    display:flex;
+    flex-direction:column;
+    text-align:center;
+}
+
+body header{
+    display:flex;
+    justify-content: space-around;
+    height:80px;
+    color:#ffffff;
+    background-color:#333333;
+    align-items:center;
+}
+
+header ul {
+    list-style:none;
+    display:flex;
+    margin:50px;
+}
+header a{
+    margin:20px;
+    color:#ffffff;
+}
+header a:hover{
+    color:orange;
+}
+
+.intro{
+    height:calc(100vh - 80px);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+
+body footer{
+    display:flex;
+    justify-content:center;
+    height:80px;
+    border-top:1px solid
+}
+
+button{
+    border-radius: 4px;
+    background-color: #333333;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom:30px;
+}
+
+button:hover{
+    color:orange;
+}
+
+input{
+
+    border-radius: 4px;
+    padding: 5px 5px;
+    margin: 8px 0;
+    width: 30%;
+    border: 2px solid #333333;
+}
+
+select{
+    border-radius: 4px;
+    padding: 5px 5px;
+    margin: 8px 0;
+    width: 5%;
+    border: 2px solid #333333;
+}
+table{
+    width:100%;
+    margin-bottom:20px;
+}
+
+th a{
+    color:#ffffff;
+}
+th a:hover{
+    color:orange;
+}
+
+thead {
+    background-color: #333333;
+}
+tr:nth-child(even) {background-color: #eeeeee}
+tr:hover {background-color: #999999;}

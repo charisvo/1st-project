@@ -1,0 +1,33 @@
+﻿@using GradesNamespace;
+@using System.Data.Entity;
+@{
+        Page.Title = "Grades Table";
+        Layout = "_Layout.cshtml";
+
+        var db = new StudentGrades();
+        WebGrid grid;
+        var gradeinfo = db.GradeTable;
+        grid = new WebGrid(gradeinfo);
+
+
+}
+
+    
+
+
+
+<div>
+    <section class="intro">
+        <p>This is the full grade table!</p>
+
+        @grid.GetHtml(columns: grid.Columns(
+                    grid.Column("StudentID"),
+                    grid.Column("StudentFirstName"),
+                    grid.Column("StudentLastName"),
+                    grid.Column("Grade")))
+    </section>
+
+
+
+    
+</div>

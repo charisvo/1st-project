@@ -1,0 +1,15 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>@Page.Title</title>
+        <link rel="stylesheet" href="~/Style/StyleSheet.css" />
+        @RenderSection("head", required: false)
+    </head>
+    <body>
+        @RenderPage("~/_Header.cshtml")
+        <main>
+            @RenderBody()
+        </main>
+        @RenderPage("~/_Footer.cshtml")
+    </body>
+</html>
