@@ -96,3 +96,15 @@ thead {
 }
 tr:nth-child(even) {background-color: #eeeeee}
 tr:hover {background-color: #999999;}
+
+tfoot{
+    background-color: #777777;
+}
+
+tfoot a{
+    color:#ffffff;
+}
+
+tfoot a:hover{
+    color:orange;
+}

@@ -1,0 +1,31 @@
+﻿@using GradesNamespace;
+@{
+    Page.Title = "Search results";
+    Layout = "_Layout.cshtml";
+    WebGrid answergrid;
+    List<GradeTable> answer = new List<GradeTable>();
+
+    if (Session["answer"] != null)
+    {
+        //Grab your value if it exists
+        answer = (List<GradeTable>)Session["answer"];
+    }
+
+    answergrid = new WebGrid(answer);
+}
+
+<div>
+    <section class="intro">
+        <p>These are the search results!</p>
+
+        
+        @answergrid.GetHtml(columns: answergrid.Columns(
+                    answergrid.Column("StudentID"),
+                    answergrid.Column("StudentFirstName"),
+                    answergrid.Column("StudentLastName"),
+                    answergrid.Column("Grade")))
+
+
+
+    </section>
+</div>

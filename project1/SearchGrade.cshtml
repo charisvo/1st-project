@@ -8,7 +8,7 @@
     bool NotExistingID = false;
     bool NotExistingName = false;
     List<GradeTable> answer = new List<GradeTable>();
-    WebGrid answergrid;
+    //WebGrid answergrid;
 
     if (IsPost)
     {
@@ -25,6 +25,9 @@
                 else
                 {
                     answer.Add(idsearch);
+                    Session["answer"] = answer;
+                    Response.Redirect("SearchResults.cshtml");
+
                 }
             }
         }
@@ -36,12 +39,16 @@
                 if (!namesearch.Any()) { NotExistingName = true; }
                 else
                 {
+
                     answer.AddRange(namesearch);
+                    Session["answer"] = answer;
+                    Response.Redirect("SearchResults.cshtml");
+
                 }
             }
         }
     }
-    answergrid = new WebGrid(answer);
+    //answergrid = new WebGrid(answer);
 }
 
 <div>
@@ -49,12 +56,7 @@
         <p>
             You can search for the grade of a student by using the id or the name of the student.<br />
         </p>
-            @answergrid.GetHtml(columns: answergrid.Columns(
-                    answergrid.Column("StudentID"),
-                    answergrid.Column("StudentFirstName"),
-                    answergrid.Column("StudentLastName"),
-                    answergrid.Column("Grade")))
-        
+
         <article>
             
             <form action="/SearchGrade" method="post">
@@ -85,6 +87,5 @@
                 
             </form>
         </article>
-        
     </section>
 </div>
